@@ -1,0 +1,10 @@
+{
+  "domain": "samsung_windfree",
+  "name": "Samsung WindFree AC",
+  "codeowners": [],
+  "dependencies": [],
+  "documentation": "https://github.com/tazkirap/Samsung-AC-Windfree-HACS",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "1.0.0"
+}
