@@ -1,47 +1,47 @@
 # Samsung WindFree AC for Home Assistant
 
-Custom component Home Assistant untuk mengontrol AC Samsung WindFree melalui SmartThings API menggunakan otentikasi OAuth2. Dibuat khusus untuk memberikan kontrol lokal dan memunculkan fitur spesifik seperti sakelar **WindFree** yang tidak tersedia di integrasi bawaan.
+A Home Assistant custom component to control Samsung WindFree Air Conditioners via the SmartThings API using OAuth2 authentication. Specifically designed to provide precise control and expose specific features like the **WindFree** mode switch, which is currently unavailable in the default SmartThings integration.
 
-## Fitur
-* 🌡️ Kontrol Suhu & Mode AC (Cool, Dry, Fan, Auto).
-* 💨 Kontrol Kecepatan Kipas (Auto, Low, Medium, High).
-* 🍃 **Sakelar Khusus WindFree Mode** (terintegrasi di Thermostat & Switch terpisah).
-* 🔄 Sistem Auto-Refresh Token OAuth2 bawaan (Token aman dari *expired* 24 jam).
-* 🍎 Mendukung Apple HomeKit (Suhu 16-30°C, Mode, dan Sakelar WindFree).
+## Features
+* 🌡️ AC Mode (Cool, Dry, Fan, Auto) & Temperature Control (16°C - 30°C).
+* 💨 Fan Speed Control (Auto, Low, Medium, High).
+* 🍃 **Dedicated WindFree Mode** (Integrated as a Thermostat Preset and a standalone Switch).
+* 🔄 Built-in OAuth2 Token Auto-Refresh system (Prevents 24-hour token expiration automatically).
+* 🍎 Fully optimized for Apple HomeKit Bridge support.
 
-## Persyaratan Awal (Prerequisites)
-Karena kebijakan SmartThings terbaru, Anda membutuhkan kredensial OAuth2. Anda perlu menyiapkan 4 data berikut:
+## Prerequisites
+Due to recent SmartThings API policies, you need personal OAuth2 credentials to establish a direct local-to-cloud connection. You will need to prepare these 4 items:
 1. `client_id`
 2. `client_secret`
-3. `refresh_token` (Sekali pakai untuk inisialisasi awal)
-4. `device_id` (ID dari AC Anda)
+3. `refresh_token` (One-time use for initial setup)
+4. `device_id` (Your AC's unique ID)
 
-### 🔑 Cara Mendapatkan Client ID, Secret, dan Refresh Token
-Silakan ikuti tutorial komprehensif mengenai SmartThings OAuth2 di artikel berikut ini:
+### 🔑 How to get Client ID, Secret, and Refresh Token
+Please follow this comprehensive tutorial on SmartThings OAuth2:
 👉 **[SmartThings API: Taming the OAuth 2.0 Beast](https://levelup.gitconnected.com/smartthings-api-taming-the-oauth-2-0-beast-5d735ecc6b24)**
 
-*Catatan Penting: Anda hanya perlu mengikuti tutorial tersebut dari **Step 1 sampai Step 3** saja untuk memancing keluar `client_id`, `client_secret`, dan `refresh_token`. Anda **TIDAK PERLU** melakukan Step 4 dan 5 (membuat server Python), karena mesin auto-refresh token tersebut sudah ditanamkan langsung ke dalam custom component ini!*
+*Important Note: You ONLY need to follow **Step 1 to Step 3** of the tutorial to generate your `client_id`, `client_secret`, and `refresh_token`. You **DO NOT** need to perform Steps 4 and 5 (creating a Python server), as the auto-refresh mechanism is already built natively into this custom component!*
 
-### 📱 Cara Mendapatkan Device ID
-1. Buka browser dan login ke **[SmartThings Advanced Web App](https://my.smartthings.com/advanced)** menggunakan akun Samsung Anda.
-2. Klik menu **Devices** di panel sebelah kiri.
-3. Cari perangkat AC Samsung WindFree Anda di daftar tersebut, lalu klik namanya.
-4. Anda akan melihat baris **Device ID** (berupa kombinasi huruf dan angka panjang, misal: `123e4567-e89b-12d3-a456-426614174000`).
-5. Salin ID tersebut.
+### 📱 How to get your Device ID
+1. Open your browser and log in to the **[SmartThings Advanced Web App](https://my.smartthings.com/advanced)** using your Samsung account.
+2. Click on the **Devices** menu on the left panel.
+3. Find your Samsung WindFree AC in the list and click on its name.
+4. Look for the **Device ID** row (it looks like a long alphanumeric string, e.g., `123e4567-e89b-12d3-a456-426614174000`).
+5. Copy this ID.
 
-## Instalasi via HACS (Direkomendasikan)
-1. Buka HACS di Home Assistant Anda -> tab **Integrations**.
-2. Klik menu tiga titik di pojok kanan atas -> **Custom repositories**.
-3. Masukkan URL repositori ini, pilih kategori **Integration**, lalu klik **Add**.
-4. Cari *Samsung WindFree AC* di HACS, lalu klik tombol **Download** di pojok kanan bawah.
-5. Restart Home Assistant Anda.
+## Installation via HACS (Recommended)
+1. Open HACS in your Home Assistant -> **Integrations** tab.
+2. Click the three-dot menu in the top right corner -> **Custom repositories**.
+3. Enter this repository's URL, select **Integration** as the category, and click **Add**.
+4. Search for *Samsung WindFree AC* in HACS, then click the **Download** button.
+5. Restart your Home Assistant.
 
-## Konfigurasi
-Tambahkan kode berikut ke dalam file `configuration.yaml` Anda, lalu masukkan kredensial yang sudah Anda dapatkan dari langkah-langkah di atas:
+## Configuration
+Add the following code to your `configuration.yaml` file, replacing the placeholders with the credentials you obtained from the steps above:
 
 ```yaml
 samsung_windfree:
-  client_id: "CLIENT_ID_ANDA"
-  client_secret: "CLIENT_SECRET_ANDA"
-  refresh_token: "REFRESH_TOKEN_AWAL_ANDA"
-  device_id: "DEVICE_ID_AC_ANDA"
+  client_id: "YOUR_CLIENT_ID"
+  client_secret: "YOUR_CLIENT_SECRET"
+  refresh_token: "YOUR_INITIAL_REFRESH_TOKEN"
+  device_id: "YOUR_AC_DEVICE_ID"
